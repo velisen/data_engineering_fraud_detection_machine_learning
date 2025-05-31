@@ -1,5 +1,6 @@
-<img src="DE-ML.png">
 #  Data Engineering & Fraud Detection with Machine Learning
+<img src="DE-ML.png">
+
 
 This project presents a modular, end-to-end pipeline for detecting fraudulent transactions using machine learning. It integrates data ingestion, preprocessing, model training, and inference within a scalable, containerized architecture.
 
