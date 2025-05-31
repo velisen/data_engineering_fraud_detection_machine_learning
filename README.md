@@ -44,16 +44,8 @@ Ensure you have the following installed:
 
 1. **Clone the repository**:
 
-```bash
-git clone https://github.com/velisen/data_engineering_fraud_detection_machine_learning.git
-cd data_engineering_fraud_detection_machine_learning
-```
 
-2. **Set up environment variables**:
-
-Create a `.env` file in the root directory and define necessary environment variables as per your configuration.
-
-3. **Build and start the services**:
+2. **Build and start the services**:
 
 ```bash
 docker-compose up --build
