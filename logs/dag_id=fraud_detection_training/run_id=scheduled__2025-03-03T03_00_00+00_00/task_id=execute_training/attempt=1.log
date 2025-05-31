@@ -1,0 +1,23 @@
+[2025-03-04T11:38:22.322+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-03-04T11:38:22.393+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fraud_detection_training.execute_training scheduled__2025-03-03T03:00:00+00:00 [queued]>
+[2025-03-04T11:38:22.406+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fraud_detection_training.execute_training scheduled__2025-03-03T03:00:00+00:00 [queued]>
+[2025-03-04T11:38:22.406+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-03-04T11:38:22.431+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): execute_training> on 2025-03-03 03:00:00+00:00
+[2025-03-04T11:38:22.436+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=5868) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-03-04T11:38:22.437+0000] {standard_task_runner.py:72} INFO - Started process 5869 to run task
+[2025-03-04T11:38:22.438+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'fraud_detection_training', 'execute_training', 'scheduled__2025-03-03T03:00:00+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/fraud_detection_training_dag.py', '--cfg-path', '/tmp/tmpwclce6c6']
+[2025-03-04T11:38:22.439+0000] {standard_task_runner.py:105} INFO - Job 10: Subtask execute_training
+[2025-03-04T11:38:22.601+0000] {task_command.py:467} INFO - Running <TaskInstance: fraud_detection_training.execute_training scheduled__2025-03-03T03:00:00+00:00 [running]> on host 90a85505a05d
+[2025-03-04T11:38:22.847+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='datamasterylab.com' AIRFLOW_CTX_DAG_ID='fraud_detection_training' AIRFLOW_CTX_TASK_ID='execute_training' AIRFLOW_CTX_EXECUTION_DATE='2025-03-03T03:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-03-03T03:00:00+00:00'
+[2025-03-04T11:38:22.847+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-03-04T11:38:27.266+0000] {fraud_detection_training_dag.py:23} INFO - Initializing fraud detection training
+[2025-03-04T11:38:27.270+0000] {fraud_detection_training.py:43} INFO - Configuration loaded successfully
+[2025-03-04T11:38:27.490+0000] {fraud_detection_training.py:68} INFO - Minio connection verified. Buckets: ['mlflow']
+[2025-03-04T11:38:27.598+0000] {python.py:240} INFO - Done. Returned value was: {'status': 'success'}
+[2025-03-04T11:38:27.701+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-03-04T11:38:27.702+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=fraud_detection_training, task_id=execute_training, run_id=scheduled__2025-03-03T03:00:00+00:00, execution_date=20250303T030000, start_date=20250304T113822, end_date=20250304T113827
+[2025-03-04T11:38:27.863+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-03-04T11:38:27.918+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-03-04T11:38:27.921+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,0 +1,177 @@
+[2025-03-04T19:40:47.154+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-03-04T19:40:47.216+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fraud_detection_training.execute_training manual__2025-03-04T19:40:43.408940+00:00 [queued]>
+[2025-03-04T19:40:47.226+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fraud_detection_training.execute_training manual__2025-03-04T19:40:43.408940+00:00 [queued]>
+[2025-03-04T19:40:47.226+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-03-04T19:40:47.247+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): execute_training> on 2025-03-04 19:40:43.408940+00:00
+[2025-03-04T19:40:47.251+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=8706) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-03-04T19:40:47.252+0000] {standard_task_runner.py:72} INFO - Started process 8707 to run task
+[2025-03-04T19:40:47.252+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'fraud_detection_training', 'execute_training', 'manual__2025-03-04T19:40:43.408940+00:00', '--job-id', '13', '--raw', '--subdir', 'DAGS_FOLDER/fraud_detection_training_dag.py', '--cfg-path', '/tmp/tmpuvpagxyy']
+[2025-03-04T19:40:47.253+0000] {standard_task_runner.py:105} INFO - Job 13: Subtask execute_training
+[2025-03-04T19:40:47.402+0000] {task_command.py:467} INFO - Running <TaskInstance: fraud_detection_training.execute_training manual__2025-03-04T19:40:43.408940+00:00 [running]> on host b7f28f610775
+[2025-03-04T19:40:47.614+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='datamasterylab.com' AIRFLOW_CTX_DAG_ID='fraud_detection_training' AIRFLOW_CTX_TASK_ID='execute_training' AIRFLOW_CTX_EXECUTION_DATE='2025-03-04T19:40:43.408940+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-03-04T19:40:43.408940+00:00'
+[2025-03-04T19:40:47.615+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-03-04T19:40:48.501+0000] {font_manager.py:1639} INFO - generated new fontManager
+[2025-03-04T19:40:53.907+0000] {warnings.py:112} WARNING - /opt/***/dags/fraud_detection_training.py:15: UserWarning: The numpy.array_api submodule is still experimental. See NEP 47.
+  from numpy.array_api import astype
+
+[2025-03-04T19:40:54.133+0000] {fraud_detection_training_dag.py:23} INFO - Initializing fraud detection training
+[2025-03-04T19:40:54.139+0000] {fraud_detection_training.py:58} INFO - Configuration loaded successfully
+[2025-03-04T19:40:54.665+0000] {fraud_detection_training.py:83} INFO - Minio connection verified. Buckets: ['mlflow']
+[2025-03-04T19:40:54.898+0000] {fraud_detection_training.py:170} INFO - Starting model training process
+[2025-03-04T19:40:54.899+0000] {fraud_detection_training.py:96} INFO - Connecting to kafka topic transactions
+[2025-03-04T19:40:54.900+0000] {fraud_detection_training.py:128} ERROR - Failed to read data from Kafka: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training.py", line 98, in read_from_kafka
+    consumer = KafkaConsumer(
+               ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 318, in __init__
+    raise KafkaConfigurationError("Unrecognized configs: %s" % (extra_configs,))
+kafka.errors.KafkaConfigurationError: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+[2025-03-04T19:40:54.913+0000] {fraud_detection_training.py:323} ERROR - Training failed: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training.py", line 173, in train_model
+    df = self.read_from_kafka()
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 98, in read_from_kafka
+    consumer = KafkaConsumer(
+               ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 318, in __init__
+    raise KafkaConfigurationError("Unrecognized configs: %s" % (extra_configs,))
+kafka.errors.KafkaConfigurationError: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+[2025-03-04T19:40:54.914+0000] {fraud_detection_training_dag.py:29} ERROR - Training failed: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 25, in _train_model
+    model, precision = trainer.train_model()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 173, in train_model
+    df = self.read_from_kafka()
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 98, in read_from_kafka
+    consumer = KafkaConsumer(
+               ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 318, in __init__
+    raise KafkaConfigurationError("Unrecognized configs: %s" % (extra_configs,))
+kafka.errors.KafkaConfigurationError: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+[2025-03-04T19:40:55.033+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 25, in _train_model
+    model, precision = trainer.train_model()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 173, in train_model
+    df = self.read_from_kafka()
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 98, in read_from_kafka
+    consumer = KafkaConsumer(
+               ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 318, in __init__
+    raise KafkaConfigurationError("Unrecognized configs: %s" % (extra_configs,))
+kafka.errors.KafkaConfigurationError: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 30, in _train_model
+    raise AirflowException(f'Model training failed: {str(e)}')
+airflow.exceptions.AirflowException: Model training failed: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+[2025-03-04T19:40:55.051+0000] {taskinstance.py:1226} INFO - Marking task as FAILED. dag_id=fraud_detection_training, task_id=execute_training, run_id=manual__2025-03-04T19:40:43.408940+00:00, execution_date=20250304T194043, start_date=20250304T194047, end_date=20250304T194055
+[2025-03-04T19:40:55.481+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-03-04T19:40:55.482+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 13 for task execute_training (Model training failed: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}; 8707)
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 25, in _train_model
+    model, precision = trainer.train_model()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 173, in train_model
+    df = self.read_from_kafka()
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 98, in read_from_kafka
+    consumer = KafkaConsumer(
+               ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kafka/consumer/group.py", line 318, in __init__
+    raise KafkaConfigurationError("Unrecognized configs: %s" % (extra_configs,))
+kafka.errors.KafkaConfigurationError: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 30, in _train_model
+    raise AirflowException(f'Model training failed: {str(e)}')
+airflow.exceptions.AirflowException: Model training failed: KafkaConfigurationError: Unrecognized configs: {'value_deserilizer'}
+[2025-03-04T19:40:55.561+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-03-04T19:40:55.732+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-03-04T19:40:55.736+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

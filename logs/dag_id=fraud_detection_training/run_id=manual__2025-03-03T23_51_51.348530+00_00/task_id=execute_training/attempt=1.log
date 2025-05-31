@@ -1,0 +1,137 @@
+[2025-03-03T23:51:56.141+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-03-03T23:51:56.202+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fraud_detection_training.execute_training manual__2025-03-03T23:51:51.348530+00:00 [queued]>
+[2025-03-03T23:51:56.213+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fraud_detection_training.execute_training manual__2025-03-03T23:51:51.348530+00:00 [queued]>
+[2025-03-03T23:51:56.213+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-03-03T23:51:56.235+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): execute_training> on 2025-03-03 23:51:51.348530+00:00
+[2025-03-03T23:51:56.240+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'fraud_detection_training', 'execute_training', 'manual__2025-03-03T23:51:51.348530+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/fraud_detection_training_dag.py', '--cfg-path', '/tmp/tmp5wqes6ls']
+[2025-03-03T23:51:56.242+0000] {standard_task_runner.py:105} INFO - Job 4: Subtask execute_training
+[2025-03-03T23:51:56.243+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=5714) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-03-03T23:51:56.243+0000] {standard_task_runner.py:72} INFO - Started process 5715 to run task
+[2025-03-03T23:51:56.381+0000] {task_command.py:467} INFO - Running <TaskInstance: fraud_detection_training.execute_training manual__2025-03-03T23:51:51.348530+00:00 [running]> on host b7f28f610775
+[2025-03-03T23:51:56.588+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='datamasterylab.com' AIRFLOW_CTX_DAG_ID='fraud_detection_training' AIRFLOW_CTX_TASK_ID='execute_training' AIRFLOW_CTX_EXECUTION_DATE='2025-03-03T23:51:51.348530+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-03-03T23:51:51.348530+00:00'
+[2025-03-03T23:51:56.588+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-03-03T23:52:01.566+0000] {fraud_detection_training_dag.py:23} INFO - Initializing fraud detection training
+[2025-03-03T23:52:01.571+0000] {fraud_detection_training.py:43} INFO - Configuration loaded successfully
+[2025-03-03T23:52:01.829+0000] {fraud_detection_training.py:68} INFO - Minio connection verified. Buckets: ['mlflow']
+[2025-03-03T23:52:01.833+0000] {fraud_detection_training_dag.py:28} ERROR - Training failed: 'tracking_url'
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 24, in _train_model
+    trainer = FraudDetectionTraining()
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 36, in __init__
+    mlflow.set_tracking_uri(self.config['mlflow']['tracking_url'])
+                            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'tracking_url'
+[2025-03-03T23:52:01.884+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 24, in _train_model
+    trainer = FraudDetectionTraining()
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 36, in __init__
+    mlflow.set_tracking_uri(self.config['mlflow']['tracking_url'])
+                            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'tracking_url'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 29, in _train_model
+    raise AirflowException(f'Model training failed: {str(e)}')
+airflow.exceptions.AirflowException: Model training failed: 'tracking_url'
+[2025-03-03T23:52:01.890+0000] {taskinstance.py:1226} INFO - Marking task as FAILED. dag_id=fraud_detection_training, task_id=execute_training, run_id=manual__2025-03-03T23:51:51.348530+00:00, execution_date=20250303T235151, start_date=20250303T235156, end_date=20250303T235201
+[2025-03-03T23:52:02.059+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-03-03T23:52:02.064+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 4 for task execute_training (Model training failed: 'tracking_url'; 5715)
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 24, in _train_model
+    trainer = FraudDetectionTraining()
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 36, in __init__
+    mlflow.set_tracking_uri(self.config['mlflow']['tracking_url'])
+                            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'tracking_url'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 29, in _train_model
+    raise AirflowException(f'Model training failed: {str(e)}')
+airflow.exceptions.AirflowException: Model training failed: 'tracking_url'
+[2025-03-03T23:52:02.179+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-03-03T23:52:02.376+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-03-03T23:52:02.386+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

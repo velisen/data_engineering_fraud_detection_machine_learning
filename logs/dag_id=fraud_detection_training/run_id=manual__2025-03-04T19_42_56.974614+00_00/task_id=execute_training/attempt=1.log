@@ -1,0 +1,603 @@
+[2025-03-04T19:43:02.252+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-03-04T19:43:02.420+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fraud_detection_training.execute_training manual__2025-03-04T19:42:56.974614+00:00 [queued]>
+[2025-03-04T19:43:02.439+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fraud_detection_training.execute_training manual__2025-03-04T19:42:56.974614+00:00 [queued]>
+[2025-03-04T19:43:02.440+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-03-04T19:43:02.484+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): execute_training> on 2025-03-04 19:42:56.974614+00:00
+[2025-03-04T19:43:02.524+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=8725) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-03-04T19:43:02.527+0000] {standard_task_runner.py:72} INFO - Started process 8726 to run task
+[2025-03-04T19:43:02.528+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'fraud_detection_training', 'execute_training', 'manual__2025-03-04T19:42:56.974614+00:00', '--job-id', '19', '--raw', '--subdir', 'DAGS_FOLDER/fraud_detection_training_dag.py', '--cfg-path', '/tmp/tmpcgw1f_sa']
+[2025-03-04T19:43:02.531+0000] {standard_task_runner.py:105} INFO - Job 19: Subtask execute_training
+[2025-03-04T19:43:02.720+0000] {task_command.py:467} INFO - Running <TaskInstance: fraud_detection_training.execute_training manual__2025-03-04T19:42:56.974614+00:00 [running]> on host 90a85505a05d
+[2025-03-04T19:43:02.965+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='datamasterylab.com' AIRFLOW_CTX_DAG_ID='fraud_detection_training' AIRFLOW_CTX_TASK_ID='execute_training' AIRFLOW_CTX_EXECUTION_DATE='2025-03-04T19:42:56.974614+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-03-04T19:42:56.974614+00:00'
+[2025-03-04T19:43:02.966+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-03-04T19:43:03.862+0000] {font_manager.py:1639} INFO - generated new fontManager
+[2025-03-04T19:43:06.798+0000] {warnings.py:112} WARNING - /opt/***/dags/fraud_detection_training.py:15: UserWarning: The numpy.array_api submodule is still experimental. See NEP 47.
+  from numpy.array_api import astype
+
+[2025-03-04T19:43:06.896+0000] {fraud_detection_training_dag.py:23} INFO - Initializing fraud detection training
+[2025-03-04T19:43:06.902+0000] {fraud_detection_training.py:58} INFO - Configuration loaded successfully
+[2025-03-04T19:43:07.065+0000] {fraud_detection_training.py:83} INFO - Minio connection verified. Buckets: ['mlflow']
+[2025-03-04T19:43:07.187+0000] {fraud_detection_training.py:170} INFO - Starting model training process
+[2025-03-04T19:43:07.188+0000] {fraud_detection_training.py:96} INFO - Connecting to kafka topic transactions
+[2025-03-04T19:43:07.196+0000] {conn.py:384} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=bootstrap-0 host=pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connecting> [IPv4 ('18.169.210.18', 9092)]>: connecting to pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 [('18.169.210.18', 9092) IPv4]
+[2025-03-04T19:43:07.196+0000] {conn.py:1219} INFO - Probing node bootstrap-0 broker version
+[2025-03-04T19:43:07.211+0000] {conn.py:480} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=bootstrap-0 host=pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <handshake> [IPv4 ('18.169.210.18', 9092)]>: Loading system default SSL CAs from ('/usr/lib/ssl/cert.pem', '/usr/lib/ssl/certs', 'SSL_CERT_FILE', '/usr/lib/ssl/cert.pem', 'SSL_CERT_DIR', '/usr/lib/ssl/certs')
+[2025-03-04T19:43:07.384+0000] {conn.py:665} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=bootstrap-0 host=pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.169.210.18', 9092)]>: Authenticated as XGISOSVJLGK43N6I via PLAIN
+[2025-03-04T19:43:07.385+0000] {conn.py:449} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=bootstrap-0 host=pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.169.210.18', 9092)]>: Connection complete.
+[2025-03-04T19:43:07.557+0000] {conn.py:1282} INFO - Broker version identified as 2.6.0
+[2025-03-04T19:43:07.557+0000] {conn.py:1283} INFO - Set configuration api_version=(2, 6, 0) to skip auto check_version requests on startup
+[2025-03-04T19:43:07.558+0000] {consumer.py:118} WARNING - group_id is None: disabling auto-commit.
+[2025-03-04T19:43:07.558+0000] {subscription_state.py:171} INFO - Updating subscribed topics to: ('transactions',)
+[2025-03-04T19:43:07.566+0000] {subscription_state.py:257} INFO - Updated partition assignment: [('transactions', 0), ('transactions', 1), ('transactions', 2), ('transactions', 3), ('transactions', 4), ('transactions', 5)]
+[2025-03-04T19:43:07.571+0000] {conn.py:384} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=1 host=b1-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connecting> [IPv4 ('18.169.76.35', 9092)]>: connecting to b1-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 [('18.169.76.35', 9092) IPv4]
+[2025-03-04T19:43:07.675+0000] {conn.py:480} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=1 host=b1-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <handshake> [IPv4 ('18.169.76.35', 9092)]>: Loading system default SSL CAs from ('/usr/lib/ssl/cert.pem', '/usr/lib/ssl/certs', 'SSL_CERT_FILE', '/usr/lib/ssl/cert.pem', 'SSL_CERT_DIR', '/usr/lib/ssl/certs')
+[2025-03-04T19:43:08.086+0000] {conn.py:665} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=1 host=b1-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.169.76.35', 9092)]>: Authenticated as XGISOSVJLGK43N6I via PLAIN
+[2025-03-04T19:43:08.086+0000] {conn.py:449} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=1 host=b1-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.169.76.35', 9092)]>: Connection complete.
+[2025-03-04T19:43:08.086+0000] {conn.py:928} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=bootstrap-0 host=pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('18.169.210.18', 9092)]>: Closing connection. 
+[2025-03-04T19:43:08.207+0000] {conn.py:384} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=4 host=b4-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connecting> [IPv4 ('18.135.141.220', 9092)]>: connecting to b4-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 [('18.135.141.220', 9092) IPv4]
+[2025-03-04T19:43:08.310+0000] {conn.py:480} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=4 host=b4-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <handshake> [IPv4 ('18.135.141.220', 9092)]>: Loading system default SSL CAs from ('/usr/lib/ssl/cert.pem', '/usr/lib/ssl/certs', 'SSL_CERT_FILE', '/usr/lib/ssl/cert.pem', 'SSL_CERT_DIR', '/usr/lib/ssl/certs')
+[2025-03-04T19:43:08.739+0000] {conn.py:665} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=4 host=b4-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.135.141.220', 9092)]>: Authenticated as XGISOSVJLGK43N6I via PLAIN
+[2025-03-04T19:43:08.740+0000] {conn.py:449} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=4 host=b4-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.135.141.220', 9092)]>: Connection complete.
+[2025-03-04T19:43:08.855+0000] {conn.py:384} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=2 host=b2-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connecting> [IPv4 ('18.175.87.62', 9092)]>: connecting to b2-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 [('18.175.87.62', 9092) IPv4]
+[2025-03-04T19:43:08.957+0000] {conn.py:480} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=2 host=b2-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <handshake> [IPv4 ('18.175.87.62', 9092)]>: Loading system default SSL CAs from ('/usr/lib/ssl/cert.pem', '/usr/lib/ssl/certs', 'SSL_CERT_FILE', '/usr/lib/ssl/cert.pem', 'SSL_CERT_DIR', '/usr/lib/ssl/certs')
+[2025-03-04T19:43:09.388+0000] {conn.py:665} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=2 host=b2-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.175.87.62', 9092)]>: Authenticated as XGISOSVJLGK43N6I via PLAIN
+[2025-03-04T19:43:09.389+0000] {conn.py:449} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=2 host=b2-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.175.87.62', 9092)]>: Connection complete.
+[2025-03-04T19:43:09.505+0000] {conn.py:384} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=5 host=b5-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connecting> [IPv4 ('3.11.137.161', 9092)]>: connecting to b5-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 [('3.11.137.161', 9092) IPv4]
+[2025-03-04T19:43:09.609+0000] {conn.py:480} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=5 host=b5-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <handshake> [IPv4 ('3.11.137.161', 9092)]>: Loading system default SSL CAs from ('/usr/lib/ssl/cert.pem', '/usr/lib/ssl/certs', 'SSL_CERT_FILE', '/usr/lib/ssl/cert.pem', 'SSL_CERT_DIR', '/usr/lib/ssl/certs')
+[2025-03-04T19:43:10.053+0000] {conn.py:665} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=5 host=b5-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('3.11.137.161', 9092)]>: Authenticated as XGISOSVJLGK43N6I via PLAIN
+[2025-03-04T19:43:10.056+0000] {conn.py:449} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=5 host=b5-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('3.11.137.161', 9092)]>: Connection complete.
+[2025-03-04T19:43:10.231+0000] {conn.py:384} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=3 host=b3-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connecting> [IPv4 ('18.132.227.118', 9092)]>: connecting to b3-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 [('18.132.227.118', 9092) IPv4]
+[2025-03-04T19:43:10.337+0000] {conn.py:480} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=3 host=b3-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <handshake> [IPv4 ('18.132.227.118', 9092)]>: Loading system default SSL CAs from ('/usr/lib/ssl/cert.pem', '/usr/lib/ssl/certs', 'SSL_CERT_FILE', '/usr/lib/ssl/cert.pem', 'SSL_CERT_DIR', '/usr/lib/ssl/certs')
+[2025-03-04T19:43:10.790+0000] {conn.py:665} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=3 host=b3-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.132.227.118', 9092)]>: Authenticated as XGISOSVJLGK43N6I via PLAIN
+[2025-03-04T19:43:10.791+0000] {conn.py:449} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=3 host=b3-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('18.132.227.118', 9092)]>: Connection complete.
+[2025-03-04T19:43:10.920+0000] {conn.py:384} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=0 host=b0-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connecting> [IPv4 ('3.11.225.156', 9092)]>: connecting to b0-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 [('3.11.225.156', 9092) IPv4]
+[2025-03-04T19:43:11.023+0000] {conn.py:480} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=0 host=b0-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <handshake> [IPv4 ('3.11.225.156', 9092)]>: Loading system default SSL CAs from ('/usr/lib/ssl/cert.pem', '/usr/lib/ssl/certs', 'SSL_CERT_FILE', '/usr/lib/ssl/cert.pem', 'SSL_CERT_DIR', '/usr/lib/ssl/certs')
+[2025-03-04T19:43:11.448+0000] {conn.py:665} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=0 host=b0-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('3.11.225.156', 9092)]>: Authenticated as XGISOSVJLGK43N6I via PLAIN
+[2025-03-04T19:43:11.448+0000] {conn.py:449} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=0 host=b0-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <authenticating> [IPv4 ('3.11.225.156', 9092)]>: Connection complete.
+[2025-03-04T19:43:25.636+0000] {conn.py:928} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=1 host=b1-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('18.169.76.35', 9092)]>: Closing connection. 
+[2025-03-04T19:43:25.640+0000] {fetcher.py:782} INFO - Fetch to node 1 failed: Cancelled: <BrokerConnection client_id=kafka-python-2.0.5, node_id=1 host=b1-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('18.169.76.35', 9092)]>
+[2025-03-04T19:43:25.641+0000] {conn.py:928} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=4 host=b4-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('18.135.141.220', 9092)]>: Closing connection. 
+[2025-03-04T19:43:25.641+0000] {fetcher.py:782} INFO - Fetch to node 4 failed: Cancelled: <BrokerConnection client_id=kafka-python-2.0.5, node_id=4 host=b4-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('18.135.141.220', 9092)]>
+[2025-03-04T19:43:25.642+0000] {conn.py:928} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=2 host=b2-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('18.175.87.62', 9092)]>: Closing connection. 
+[2025-03-04T19:43:25.643+0000] {fetcher.py:782} INFO - Fetch to node 2 failed: Cancelled: <BrokerConnection client_id=kafka-python-2.0.5, node_id=2 host=b2-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('18.175.87.62', 9092)]>
+[2025-03-04T19:43:25.643+0000] {conn.py:928} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=5 host=b5-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('3.11.137.161', 9092)]>: Closing connection. 
+[2025-03-04T19:43:25.644+0000] {fetcher.py:782} INFO - Fetch to node 5 failed: Cancelled: <BrokerConnection client_id=kafka-python-2.0.5, node_id=5 host=b5-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('3.11.137.161', 9092)]>
+[2025-03-04T19:43:25.644+0000] {conn.py:928} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=3 host=b3-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('18.132.227.118', 9092)]>: Closing connection. 
+[2025-03-04T19:43:25.644+0000] {fetcher.py:782} INFO - Fetch to node 3 failed: Cancelled: <BrokerConnection client_id=kafka-python-2.0.5, node_id=3 host=b3-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('18.132.227.118', 9092)]>
+[2025-03-04T19:43:25.645+0000] {conn.py:928} INFO - <BrokerConnection client_id=kafka-python-2.0.5, node_id=0 host=b0-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('3.11.225.156', 9092)]>: Closing connection. 
+[2025-03-04T19:43:25.645+0000] {fetcher.py:782} INFO - Fetch to node 0 failed: Cancelled: <BrokerConnection client_id=kafka-python-2.0.5, node_id=0 host=b0-pkc-41wq6.eu-west-2.aws.confluent.cloud:9092 <connected> [IPv4 ('3.11.225.156', 9092)]>
+[2025-03-04T19:43:26.306+0000] {fraud_detection_training.py:124} INFO - Kafka data read successfully with fraud rate: 0.38%
+[2025-03-04T19:43:35.238+0000] {fraud_detection_training.py:249} INFO - Starting hyperparameter tuning...
+[2025-03-04T19:43:35.245+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/joblib/parallel.py:1359: UserWarning: Loky-backed parallel loops cannot be called in a multiprocessing, setting n_jobs=1
+  n_jobs = self._backend.configure(n_jobs=self.n_jobs, parallel=self,
+
+[2025-03-04T19:43:35.922+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:43:35] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:43:39.400+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:43:39] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:43:44.856+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:43:44] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:43:48.068+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:43:48] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:43:51.712+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:43:51] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:43:55.102+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:43:55] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:43:57.991+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:43:57] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:00.195+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:00] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:02.165+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:02] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:04.551+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:04] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:06.797+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:06] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:09.077+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:09] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:11.527+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:11] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:15.208+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:15] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:21.091+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:21] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:23.529+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:23] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:28.615+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:28] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:34.738+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:34] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:38.996+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:38] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:43.484+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:43] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:48.350+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:48] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:56.038+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:56] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:44:59.902+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:44:59] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:02.315+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:02] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:04.447+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:04] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:08.561+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:08] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:13.799+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:13] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:18.008+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:18] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:22.269+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:22] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:27.928+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:27] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:32.038+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:32] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:36.106+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:36] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:40.068+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:40] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:43.911+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:43] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:46.855+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:46] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:49.132+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:49] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:51.362+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:51] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:45:55.629+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:45:55] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:01.283+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:01] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:05.492+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:05] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:07.620+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:07] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:09.577+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:09] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:11.713+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:11] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:14.697+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:14] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:17.700+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:17] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:20.810+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:20] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:22.637+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:22] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:24.572+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:24] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:26.448+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:26] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:28.497+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:28] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:31.419+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:31] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:34.134+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:34] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:36.260+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:36] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:38.417+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:38] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:40.406+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:40] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:44.108+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:44] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:48.686+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:48] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:52.518+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:52] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:55.479+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:55] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:46:58.457+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:46:58] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:47:01.962+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/xgboost/core.py:158: UserWarning: [19:47:01] WARNING: /workspace/src/learner.cc:740: 
+Parameters: { "n_job" } are not used.
+
+  warnings.warn(smsg, UserWarning)
+
+[2025-03-04T19:47:07.739+0000] {fraud_detection_training.py:253} INFO - Best hyperparameters: {'classifier__subsample': 0.6, 'classifier__reg_alpha': 0, 'classifier__max_depth': 7, 'classifier__learning_rate': 0.1, 'classifier__gamma': 0, 'classifier__colsample_bytree': 0.6}
+[2025-03-04T19:47:08.256+0000] {fraud_detection_training.py:259} INFO - Optimal threshold determined: 0.7837
+[2025-03-04T19:47:09.870+0000] {credentials.py:1147} INFO - Found credentials in environment variables.
+[2025-03-04T19:47:10.139+0000] {logging_mixin.py:190} INFO - 🏃 View run bemused-rat-21 at: http://mlflow-server:5500/#/experiments/1/runs/b9c484f53fce466c9e8a208ea92ccbc4
+[2025-03-04T19:47:10.141+0000] {logging_mixin.py:190} INFO - 🧪 View experiment at: http://mlflow-server:5500/#/experiments/1
+[2025-03-04T19:47:10.253+0000] {fraud_detection_training.py:323} ERROR - Training failed: Figure.set() got an unexpected keyword argument 'figuresize'
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training.py", line 299, in train_model
+    plt.figure(figuresize=(10, 6))
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/pyplot.py", line 1042, in figure
+    manager = new_figure_manager(
+              ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/pyplot.py", line 552, in new_figure_manager
+    return _get_backend_mod().new_figure_manager(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/backend_bases.py", line 3500, in new_figure_manager
+    fig = fig_cls(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/figure.py", line 2560, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/figure.py", line 154, in __init__
+    self.set(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 146, in <lambda>
+    cls.set = lambda self, **kwargs: Artist.set(self, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1241, in set
+    return self._internal_update(cbook.normalize_kwargs(kwargs, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1233, in _internal_update
+    return self._update_props(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1206, in _update_props
+    raise AttributeError(
+AttributeError: Figure.set() got an unexpected keyword argument 'figuresize'
+[2025-03-04T19:47:10.267+0000] {fraud_detection_training_dag.py:29} ERROR - Training failed: Figure.set() got an unexpected keyword argument 'figuresize'
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 25, in _train_model
+    model, precision = trainer.train_model()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 299, in train_model
+    plt.figure(figuresize=(10, 6))
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/pyplot.py", line 1042, in figure
+    manager = new_figure_manager(
+              ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/pyplot.py", line 552, in new_figure_manager
+    return _get_backend_mod().new_figure_manager(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/backend_bases.py", line 3500, in new_figure_manager
+    fig = fig_cls(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/figure.py", line 2560, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/figure.py", line 154, in __init__
+    self.set(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 146, in <lambda>
+    cls.set = lambda self, **kwargs: Artist.set(self, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1241, in set
+    return self._internal_update(cbook.normalize_kwargs(kwargs, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1233, in _internal_update
+    return self._update_props(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1206, in _update_props
+    raise AttributeError(
+AttributeError: Figure.set() got an unexpected keyword argument 'figuresize'
+[2025-03-04T19:47:10.358+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 25, in _train_model
+    model, precision = trainer.train_model()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 299, in train_model
+    plt.figure(figuresize=(10, 6))
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/pyplot.py", line 1042, in figure
+    manager = new_figure_manager(
+              ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/pyplot.py", line 552, in new_figure_manager
+    return _get_backend_mod().new_figure_manager(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/backend_bases.py", line 3500, in new_figure_manager
+    fig = fig_cls(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/figure.py", line 2560, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/figure.py", line 154, in __init__
+    self.set(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 146, in <lambda>
+    cls.set = lambda self, **kwargs: Artist.set(self, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1241, in set
+    return self._internal_update(cbook.normalize_kwargs(kwargs, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1233, in _internal_update
+    return self._update_props(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1206, in _update_props
+    raise AttributeError(
+AttributeError: Figure.set() got an unexpected keyword argument 'figuresize'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 30, in _train_model
+    raise AirflowException(f'Model training failed: {str(e)}')
+airflow.exceptions.AirflowException: Model training failed: Figure.set() got an unexpected keyword argument 'figuresize'
+[2025-03-04T19:47:10.368+0000] {taskinstance.py:1226} INFO - Marking task as FAILED. dag_id=fraud_detection_training, task_id=execute_training, run_id=manual__2025-03-04T19:42:56.974614+00:00, execution_date=20250304T194256, start_date=20250304T194302, end_date=20250304T194710
+[2025-03-04T19:47:10.528+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-03-04T19:47:10.531+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 19 for task execute_training (Model training failed: Figure.set() got an unexpected keyword argument 'figuresize'; 8726)
+Traceback (most recent call last):
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 25, in _train_model
+    model, precision = trainer.train_model()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training.py", line 299, in train_model
+    plt.figure(figuresize=(10, 6))
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/pyplot.py", line 1042, in figure
+    manager = new_figure_manager(
+              ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/pyplot.py", line 552, in new_figure_manager
+    return _get_backend_mod().new_figure_manager(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/backend_bases.py", line 3500, in new_figure_manager
+    fig = fig_cls(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/figure.py", line 2560, in __init__
+    super().__init__(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/figure.py", line 154, in __init__
+    self.set(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 146, in <lambda>
+    cls.set = lambda self, **kwargs: Artist.set(self, **kwargs)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1241, in set
+    return self._internal_update(cbook.normalize_kwargs(kwargs, self))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1233, in _internal_update
+    return self._update_props(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/matplotlib/artist.py", line 1206, in _update_props
+    raise AttributeError(
+AttributeError: Figure.set() got an unexpected keyword argument 'figuresize'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/fraud_detection_training_dag.py", line 30, in _train_model
+    raise AirflowException(f'Model training failed: {str(e)}')
+airflow.exceptions.AirflowException: Model training failed: Figure.set() got an unexpected keyword argument 'figuresize'
+[2025-03-04T19:47:10.610+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-03-04T19:47:10.712+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-03-04T19:47:10.716+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
